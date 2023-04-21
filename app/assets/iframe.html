@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/@zendeskgarden/css-bedrock@7.0.21,npm/@zendeskgarden/css-utilities@4.3.0">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+</head>
+<body>
+  <button id="create_user" data-target="" data-email="" class="rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Merge User</button>
+  <div class="mb-8">
+    <strong>Zendesk User</strong>
+    <pre id="zendesk_user"></pre>
+  </div>
+  <div class="mb-8">
+    <strong>Zendesk Identity</strong>
+    <pre id="zendesk_identity"></pre>
+  </div>
+  <div>
+    <strong>SunCo User</strong>
+    <pre id="sunco_user"></pre>
+  </div>
+  <div>
+    <strong>Existing User</strong>
+    <pre id="existing_user"></pre>
+  </div>
+
+  <script src="https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js"></script>  
+ <script src="main.js"></script>
+</body>
+</html>
