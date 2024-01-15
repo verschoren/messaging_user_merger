@@ -1,18 +1,26 @@
 var client = ZAFClient.init();
 
 //Add Smooch App ID and API Token
-const smooch_app_id = '';
-const smooch_app_token = '';
-
+var sunco_app_id = '';
+var sunco_app_token = '';
+var sunco_key_id = '';
 client.invoke('resize', { width: '100%', height: '100vh' });
 
 $(document).ready(async function() {
+    var metadata = await client.metadata();
+    console.log(metadata);
+    sunco_app_id = metadata.settings.sunco_app_id;
+    sunco_app_token = metadata.settings.sunco_app_token;
+    sunco_key_id = metadata.settings.sunco_key_id;
+    sunco_auth = btoa(sunco_key_id + ':' + sunco_app_token);
     var requester = await client.get('ticket.requester').then(function(data) {
     console.log(data);
-     return data['ticket.requester'];
+        return data['ticket.requester'];
     });
     console.log(requester);
     $('#zendesk_user').html(JSON.stringify(requester,null, 2));
+    hljs.highlightAll();
+
     var requester_id = requester.id;
     //get api/v2/users/identities
     var identities = await client.request({
@@ -20,33 +28,35 @@ $(document).ready(async function() {
         type: 'GET',
         dataType: 'json'
     }).then(function(data) {
-     return data['identities'];
+        return data['identities'];
     });
 
     //search for idenities with type messaging
     var messagingIdentities = identities.filter(function(identity) {
-    return identity.type === 'messaging';
+        return identity.type === 'messaging';
     });
 
     if (messagingIdentities[0]){
         $('#zendesk_identity').html(JSON.stringify(messagingIdentities[0], null, 2));
         var sunco_id = messagingIdentities[0].value;
-
-        var sunco_user = await client.request({
-            url: `https://api.smooch.io/v2/apps/${smooch_app_id}/users/${sunco_id}`,
-            type: 'GET',
-            dataType: 'json',
+        const options = {
+            url: `https://api.smooch.io/v2/apps/${sunco_app_id}/users/${sunco_id}`,
+            type: "GET",
             headers: {
-                'authorization': `Basic ${smooch_app_token}`
-            }
-        }).then(function(data) {
-            console.log(data);
-            return data;
+              Authorization: `Basic ${sunco_auth}`,
+            },
+            accepts: "application/json"
+          };
+          
+        var sunco_user = await client.request(options).then((response) => {
+            return response;
         });
+
 
         console.log(sunco_user.user.profile);
         $('#sunco_user').html(JSON.stringify(sunco_user.user, null, 2));
-    
+        hljs.highlightAll();
+
         // search for user with sunco_user.user.profile.email
         var zendesk_user = await client.request({
             url: '/api/v2/users/search.json?query=' + sunco_user.user.profile.email,
@@ -64,6 +74,7 @@ $(document).ready(async function() {
         }
         else{
             $('#existing_user').html(JSON.stringify(zendesk_user.users[0], null, 2));
+            hljs.highlightAll();
             $('#create_user').attr('data-target', zendesk_user.users[0].id);
             $('#create_user').html('Merge User');
         }

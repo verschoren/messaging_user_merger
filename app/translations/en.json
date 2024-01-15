@@ -1,8 +1,22 @@
 {
   "app": {
-    "name": "Zen Tunes",
-    "short_description": "Play the famous zen tunes in your help desk.",
-    "long_description": "Play the famous zen tunes in your help desk and \n listen to the beats it has to offer.",
-    "installation_instructions": "Simply click install."
+    "name": "Sunco User Mapper",
+    "short_description": "This application finds SunCo User Data in your instance",
+    "long_description": "This application finds SunCo User Data in your instance",
+    "installation_instructions": "Create a new Application in Apps & Integrations > Conversations API",
+    "parameters": {
+      "sunco_app_id": {
+        "label": "App ID",
+        "helpText": ""
+      },
+      "sunco_key_id": {
+        "label": "Key ID",
+        "helpText": "Starts with app_"
+      },
+      "sunco_app_token": {
+        "label": "Secret Key",
+        "helpText": "Long string with a hyphen -"
+      }
+    }
   }
 }
