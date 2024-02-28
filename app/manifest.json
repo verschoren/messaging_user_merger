@@ -15,29 +15,6 @@
       }
     }
   },
-  "parameters": [
-    {
-      "name": "sunco_app_id",
-      "type": "text",
-      "required": true,
-      "secure": false,
-      "default": ""
-    },
-    {
-      "name": "sunco_key_id",
-      "type": "text",
-      "required": true,
-      "secure": true,
-      "default": ""
-    },
-    {
-      "name": "sunco_app_token",
-      "type": "text",
-      "required": true,
-      "secure": true,
-      "default": ""
-    }
-  ],
   "version": "1.1",
   "frameworkVersion": "2.0",
   "domainWhitelist" : ["https://api.smooch.io"]
