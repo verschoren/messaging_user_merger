@@ -1,9 +1,9 @@
 var client = ZAFClient.init();
 
 //Add Smooch App ID and API Token
-var sunco_app_id = '5eb9806b73e3cf000f2a8e31';
-var sunco_app_token = 'dArIe2Sh0I7NlH4knDfyzMmaGXmet950LpJXlmLBC_LstxQjQXcGUVSdnwTW9JNjWSSF5hZvUc3obZrgH5_7dA';
-var sunco_key_id = 'app_65a661b66b050d187d3711b8';
+var sunco_app_id = '';
+var sunco_app_token = '';
+var sunco_key_id = '';
 client.invoke('resize', { width: '100%', height: '100vh' });
 
 $(document).ready(async function() {
